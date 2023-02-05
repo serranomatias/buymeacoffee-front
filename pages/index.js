@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 import abi from '../utils/BuyMeACoffee.json';
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers'
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import CoffeeButton from '../components/CoffeeButton';
 
 
@@ -80,7 +80,13 @@ export default function Home() {
  
 
 
-  // Function to fetch all memos stored on-chain.
+
+
+  useEffect(() => {
+    const contractABI = abi.abi;
+    let buyMeACoffee;
+    isWalletConnected();
+      // Function to fetch all memos stored on-chain.
   const getMemos = async () => {
     try {
       const { ethereum } = window;
@@ -105,10 +111,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    let buyMeACoffee;
-    isWalletConnected();
     getMemos();
      // Clear the form fields.
      setName("");
@@ -255,7 +257,7 @@ export default function Home() {
         {currentAccount && (memos.map((memo, idx) => {
           return (
             <div key={idx} className="p-8" style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px", display: "grid", placeItems: "center"}}>
-              <p style={{ "fontWeight": "bold" }}>"{memo.message}"</p>
+              <p className='font-bold'>"{memo.message}"</p>
               <p>From: {memo.name}</p>
             </div>
           )
