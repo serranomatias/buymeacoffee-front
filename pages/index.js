@@ -200,7 +200,7 @@ export default function Home() {
                   </textarea>
                 </div>
                 <div className='mt-5'>
-                  <h2 className='text-center'>How many coffee's do you want to send?</h2>
+                  <h2 className='text-center'>How many coffee&apos;s do you want to send?</h2>
                   <div className='flex justify-center items-center align-center gap-5 mt-5'>
                     <span className='text-5xl'>
                       ☕
@@ -256,7 +256,7 @@ export default function Home() {
         {currentAccount && (memos.map((memo, idx) => {
           return (
             <div key={idx} className="p-8" style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px", display: "grid", placeItems: "center" }}>
-              <p className='font-bold'>"{memo.message}"</p>
+              <p className='font-bold'>&quot;{memo.message}&quot;</p>
               <p>From: {memo.name}</p>
             </div>
           )
