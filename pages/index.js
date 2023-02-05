@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css';
 import abi from '../utils/BuyMeACoffee.json';
 import React, { useEffect, useState } from 'react';
@@ -28,13 +27,13 @@ export default function Home() {
     setName(event.target.value);
   }
   const onTipChange = (event) => {
-    if(event.target.value > 0){
+    if (event.target.value > 0) {
       setTotalTip(event.target.value);
     } else {
       setTotalTip(1);
     }
   }
-  const coffeePrice = () =>{
+  const coffeePrice = () => {
     return totalTip * 0.001;
   }
 
@@ -77,7 +76,7 @@ export default function Home() {
     }
   }
 
- 
+
 
 
 
@@ -86,35 +85,35 @@ export default function Home() {
     const contractABI = abi.abi;
     let buyMeACoffee;
     isWalletConnected();
-      // Function to fetch all memos stored on-chain.
-  const getMemos = async () => {
-    try {
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const buyMeACoffee = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
+    // Function to fetch all memos stored on-chain.
+    const getMemos = async () => {
+      try {
+        const { ethereum } = window;
+        if (ethereum) {
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const signer = provider.getSigner();
+          const buyMeACoffee = new ethers.Contract(
+            contractAddress,
+            contractABI,
+            signer
+          );
 
 
-        console.log("fetching memos from the blockchain..");
-        const memos = await buyMeACoffee.getMemos();
-        console.log("fetched!");
-        setMemos(memos);
-      } else {
-        console.log("MetaMask is not connected");
+          console.log("fetching memos from the blockchain..");
+          const memos = await buyMeACoffee.getMemos();
+          console.log("fetched!");
+          setMemos(memos);
+        } else {
+          console.log("MetaMask is not connected");
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
     getMemos();
-     // Clear the form fields.
-     setName("");
-     setMessage("");
+    // Clear the form fields.
+    setName("");
+    setMessage("");
 
 
     // Create an event handler function for when someone sends
@@ -177,7 +176,7 @@ export default function Home() {
                   </label>
                   <br />
                   <input
-                  className='rounded-md pl-2'
+                    className='rounded-md pl-2'
                     id="name"
                     type="text"
                     placeholder="anon"
@@ -191,7 +190,7 @@ export default function Home() {
                   </label>
                   <br />
                   <textarea
-                  className='rounded-md pl-2'
+                    className='rounded-md pl-2'
                     rows={3}
                     placeholder="Enjoy your coffee!"
                     id="message"
@@ -201,48 +200,48 @@ export default function Home() {
                   </textarea>
                 </div>
                 <div className='mt-5'>
-                <h2 className='text-center'>
-                  How many coffee's do you want to send?</h2>
+                  <h2 className='text-center'>How many coffee's do you want to send?</h2>
                   <div className='flex justify-center items-center align-center gap-5 mt-5'>
-                
                     <span className='text-5xl'>
                       ☕
                     </span>
-                    <span 
-                    onClick={() => {
-                      setTotalTip(1)}}
-                    className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900 focus:bg-amber-900'>
+                    <span
+                      onClick={() => {
+                        setTotalTip(1)
+                      }}
+                      className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900 focus:bg-amber-900'>
                       1
                     </span>
-                    <span 
-                    onClick={() => {
-                      setTotalTip(3)}}
-                    className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900'>
+                    <span
+                      onClick={() => {
+                        setTotalTip(3)
+                      }}
+                      className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900'>
                       3
                     </span>
-                    <span 
-                    onClick={() => {
-                      setTotalTip(5)
+                    <span
+                      onClick={() => {
+                        setTotalTip(5)
 
-                    }}
-                    className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer hover:bg-amber-900'>
+                      }}
+                      className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer hover:bg-amber-900'>
                       5
                     </span>
                     <input
-                    min="1"
-                    max="5000"
-                    type="number"
-                    placeholder={totalTip}
-                    onChange={onTipChange}
-                    value={totalTip}
-                    className='text-3xl bg-gray-100 resize-none border-2 border-gray-200 w-12 h-12 active:bg-gray-400 pl-2 text-center overflow-hidden'
+                      min="1"
+                      max="5000"
+                      type="number"
+                      placeholder={totalTip}
+                      onChange={onTipChange}
+                      value={totalTip}
+                      className='text-3xl bg-gray-100 resize-none border-2 border-gray-200 w-12 h-12 active:bg-gray-400 pl-2 text-center overflow-hidden'
                     >
-                     
+
                     </input>
                   </div>
                 </div>
                 <div className='flex flex-col align-center justify-center'>
-                 <CoffeeButton quantity={1} coffeeType={"Coffee"} tip={`0,001 ETH`} price={coffeePrice().toString()} name={name} message={message}/>
+                  <CoffeeButton quantity={1} coffeeType={"Coffee"} tip={`0,001 ETH`} price={coffeePrice().toString()} name={name} message={message} />
                 </div>
               </form>
             </div>
@@ -256,7 +255,7 @@ export default function Home() {
 
         {currentAccount && (memos.map((memo, idx) => {
           return (
-            <div key={idx} className="p-8" style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px", display: "grid", placeItems: "center"}}>
+            <div key={idx} className="p-8" style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px", display: "grid", placeItems: "center" }}>
               <p className='font-bold'>"{memo.message}"</p>
               <p>From: {memo.name}</p>
             </div>
