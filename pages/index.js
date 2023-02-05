@@ -22,10 +22,20 @@ export default function Home() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [memos, setMemos] = useState([]);
-  var [totalTip, setTotalTip] = useState("");
+  const [totalTip, setTotalTip] = useState(0);
 
   const onNameChange = (event) => {
     setName(event.target.value);
+  }
+  const onTipChange = (event) => {
+    if(event.target.value > 0){
+      setTotalTip(event.target.value);
+    } else {
+      setTotalTip(1);
+    }
+  }
+  const coffeePrice = () =>{
+    return totalTip * 0.001;
   }
 
   const onMessageChange = (event) => {
@@ -100,6 +110,9 @@ export default function Home() {
     let buyMeACoffee;
     isWalletConnected();
     getMemos();
+     // Clear the form fields.
+     setName("");
+     setMessage("");
 
 
     // Create an event handler function for when someone sends
@@ -138,10 +151,6 @@ export default function Home() {
       }
     }
   }, []);
-
-    const coffeeObj = { quantity: 1, tip: "0,001 ETH"};
-
-
   return (
     <>
       <div className={styles.container}>
@@ -158,14 +167,15 @@ export default function Home() {
           </h1>
 
           {currentAccount ? (
-            <div className="flex flex-col">
-              <form>
+            <div className="flex w-auto flex-col p-10 rounded-xl">
+              <form className='w-full flex flex-col items-center'>
                 <div>
                   <label>
                     Name
                   </label>
                   <br />
                   <input
+                  className='rounded-md pl-2'
                     id="name"
                     type="text"
                     placeholder="anon"
@@ -179,6 +189,7 @@ export default function Home() {
                   </label>
                   <br />
                   <textarea
+                  className='rounded-md pl-2'
                     rows={3}
                     placeholder="Enjoy your coffee!"
                     id="message"
@@ -187,8 +198,49 @@ export default function Home() {
                   >
                   </textarea>
                 </div>
+                <div className='mt-5'>
+                <h2 className='text-center'>
+                  How many coffee's do you want to send?</h2>
+                  <div className='flex justify-center items-center align-center gap-5 mt-5'>
+                
+                    <span className='text-5xl'>
+                      ☕
+                    </span>
+                    <span 
+                    onClick={() => {
+                      setTotalTip(1)}}
+                    className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900 focus:bg-amber-900'>
+                      1
+                    </span>
+                    <span 
+                    onClick={() => {
+                      setTotalTip(3)}}
+                    className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900'>
+                      3
+                    </span>
+                    <span 
+                    onClick={() => {
+                      setTotalTip(5)
+
+                    }}
+                    className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer hover:bg-amber-900'>
+                      5
+                    </span>
+                    <input
+                    min="1"
+                    max="5000"
+                    type="number"
+                    placeholder={totalTip}
+                    onChange={onTipChange}
+                    value={totalTip}
+                    className='text-3xl bg-gray-100 resize-none border-2 border-gray-200 w-12 h-12 active:bg-gray-400 pl-2 text-center overflow-hidden'
+                    >
+                     
+                    </input>
+                  </div>
+                </div>
                 <div className='flex flex-col align-center justify-center'>
-                 <CoffeeButton quantity={1} coffeeType={"Coffee"} tip={`0,001 ETH`} />
+                 <CoffeeButton quantity={1} coffeeType={"Coffee"} tip={`0,001 ETH`} price={coffeePrice().toString()} name={name} message={message}/>
                 </div>
               </form>
             </div>
@@ -202,21 +254,21 @@ export default function Home() {
 
         {currentAccount && (memos.map((memo, idx) => {
           return (
-            <div key={idx} style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px" }}>
+            <div key={idx} className="p-8" style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px", display: "grid", placeItems: "center"}}>
               <p style={{ "fontWeight": "bold" }}>"{memo.message}"</p>
-              <p>From: {memo.name} at {memo.timestamp.toString()}</p>
+              <p>From: {memo.name}</p>
             </div>
           )
         }))}
 
         <footer className="m-5 pt-5 w-full flex justify-center border-t">
           <a
-            href="https://alchemy.com/?a=roadtoweb3weektwo"
+            href="https://www.instagram.com/matiseerrano"
             target="_blank"
             rel="noopener noreferrer"
             className='p-5'
           >
-            Created by @serrano-matias
+            Created by @serranomatias
           </a>
         </footer>
       </div>
