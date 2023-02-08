@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers'
 import { Toaster } from 'react-hot-toast';
 import CoffeeButton from '../components/CoffeeButton';
+import Footer from '../components/footer';
 
 
 
@@ -204,12 +205,12 @@ export default function Home() {
                   <div className='flex justify-center items-center align-center gap-5 mt-5'>
                     <span className='text-5xl'>
                       ☕
-                    </span>
-                    <span
+                      </span>
+                      <span
                       onClick={() => {
                         setTotalTip(1)
                       }}
-                      className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900 focus:bg-amber-900'>
+                      className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer  hover:bg-amber-900'>
                       1
                     </span>
                     <span
@@ -222,7 +223,6 @@ export default function Home() {
                     <span
                       onClick={() => {
                         setTotalTip(5)
-
                       }}
                       className='text-3xl bg-amber-600 rounded-full w-12 h-12 flex items-center justify-center text-white cursor-pointer hover:bg-amber-900'>
                       5
@@ -262,16 +262,7 @@ export default function Home() {
           )
         }))}
 
-        <footer className="m-5 pt-5 w-full flex justify-center border-t">
-          <a
-            href="https://www.instagram.com/matiseerrano"
-            target="_blank"
-            rel="noopener noreferrer"
-            className='p-5'
-          >
-            Created by @serranomatias
-          </a>
-        </footer>
+      <Footer />
       </div>
     </>
   )
