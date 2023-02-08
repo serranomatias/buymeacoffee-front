@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+El siguiente código es un componente React llamado "CoffeeButton", que permite a un usuario comprar un café en un contrato inteligente en la red Ethereum.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+El componente importa el archivo "BuyMeACoffee.json" que contiene la definición de la interfaz de programación de aplicaciones (ABI) del contrato inteligente "BuyMeACoffee". Se utiliza la librería "ethers" para interactuar con el contrato inteligente.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El contrato inteligente está ubicado en la dirección "0x3FD8878D672C0eD2b225E1abaDA254004e5C6fd1" y su ABI es obtenida del archivo "BuyMeACoffee.json".
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+La función "buyCoffee" es llamada cuando se hace clic en el botón, y realiza las siguientes acciones:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Verifica si el precio es válido.
+Verifica si "ethereum" está disponible en la ventana.
+Si "ethereum" está disponible, se crea una nueva instancia de "Web3Provider" y se obtiene un signer.
+Se crea una nueva instancia del contrato inteligente utilizando la dirección, la ABI y el signer.
+Se ejecuta la función "buyCoffee" en el contrato inteligente con los siguientes parámetros: nombre (opcional), mensaje (opcional) y valor (precio en ETH).
+Se espera a que la transacción sea minada y se muestra un mensaje en pantalla con el resultado.
+El componente devuelve un botón con el texto "Send Coffee for (precio en ETH) ETH". Al hacer clic en el botón, se llama a la función "buyCoffee".
