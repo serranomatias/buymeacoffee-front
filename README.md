@@ -1,6 +1,24 @@
 
-## Getting Started
+#  :coffee: buymeacoffee
+BuyMeACoffee but on the blockchain.
 
+Dapp:
+- https://buymeacoffee-blockchain.vercel.app/
+
+## Description
+
+Allow people to send a how many "coffee's" they want, each coffee cost 0,001ETH.
+Also the smartcontract allow leave a name and a message to attach in a memo with the date of approved transaction.
+
+## Used
+- Solidity
+- Hardhat
+- Next.js
+- Web3Modal
+- Ethers.js
+- dotEnv
+
+### FrontEnd Explanation
 El siguiente código es un componente React llamado "CoffeeButton", que permite a un usuario comprar un café en un contrato inteligente en la red Ethereum.
 
 El componente importa el archivo "BuyMeACoffee.json" que contiene la definición de la interfaz de programación de aplicaciones (ABI) del contrato inteligente "BuyMeACoffee". Se utiliza la librería "ethers" para interactuar con el contrato inteligente.
